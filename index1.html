@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="web icon" href="favicon.png" type="png">
+    <title>Saad'Ullah Books</title>
+    <style>
+      :root {
+        --chinese-violet_30: hsla(304, 14%, 46%, 0.3);
+        --chinese-violet: hsl(304, 14%, 46%);
+        --sonic-silver: hsl(208, 7%, 46%);
+        --old-rose_30: hsla(357, 37%, 62%, 0.3);
+        --ghost-white: hsl(233, 33%, 95%);
+        --light-pink: hsl(357, 93%, 84%);
+        --light-gray: hsl(0, 0%, 80%);
+        --old-rose: hsl(357, 37%, 62%);
+        --seashell: hsl(20, 43%, 93%);
+        --charcoal: hsl(203, 30%, 26%);
+        --white: hsl(0, 0%, 100%);
+        
+        --ff-philosopher: 'Philosopher', sans-serif;
+        --ff-poppins: 'Poppins', sans-serif;
+        
+        --fs-1: 4rem;
+        --fs-2: 3.2rem;
+        --fs-3: 2.7rem;
+        --fs-4: 2.4rem;
+        --fs-5: 2.2rem;
+        --fs-6: 2rem;
+        --fs-7: 1.8rem;
+        
+        --fw-500: 500;
+        --fw-700: 700;
+        
+        --section-padding: 20px;
+        
+        --shadow-1: 4px 6px 10px hsla(231, 94%, 7%, 0.06);
+        --shadow-2: 2px 0 15px 5px hsla(231, 94%, 7%, 0.06);
+        --shadow-3: 3px 3px var(--chinese-violet);
+        --shadow-4: 5px 5px var(--chinese-violet);
+        
+        --radius-5: 5px;
+        --radius-10: 10px;
+        
+        --polygon: polygon(100% 29%, 100% 100%, 19% 99%, 0 56%);
+        
+        --transition-1: 0.25s ease;
+        --transition-2: 0.5s ease;
+        --cubic-out: cubic-bezier(0.33, 0.85, 0.4, 0.96);
+      }
+      
+      body {
+        font-family: var(--ff-philosopher);
+        background-color: var(--ghost-white);
+        color: var(--charcoal);
+        margin: 0;
+      }
+      
+      #bookCatalog {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: stretch;
+        padding: var(--section-padding);
+      }
+      
+      .book {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--seashell);
+        margin: 20px;
+        padding: 20px;
+        max-width: 300px;
+        box-shadow: var(--shadow-1);
+        border-radius: var(--radius-10);
+        background-color: var(--white);
+        transition: background-color var(--transition-1);
+      }
+      
+      .book:hover {
+        background-color: var(--light-gray);
+        transition: background-color var(--transition-1);
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--radius-5);
+        box-shadow: var(--shadow-3);
+      }
+      
+      h2 {
+        font-size: var(--fs-2);
+        margin-bottom: 10px;
+        color: var(--charcoal);
+    
+      }
+      
+      p {
+        font-size: var(--fs-4);
+        margin-bottom: 5px;
+      }
+
+      ::selection {
+        background-color: var(--old-rose);
+        color: var(--white);
+      }
+      
+      @media only screen and (max-width: 768px) {
+        .book {
+          max-width: 100%;
+        }
+      }
+      
+    
+    </style>
+
+</head>
+<body>
+
+<div id="bookCatalog"></div>
+
+<script>
+    const books = [
+        {
+            "id": 1,
+            "title": "To Kill a Mockingbird",
+            "author": "Harper Lee",
+            "category": "Fiction",
+            "price": 12.99,
+            "description": "Classic novel set in the American South during the 1930s.",
+            "cover_image": "pic1.jpg"
+        },
+        {
+          "id": 2,
+          "title": "1984",
+          "author": "George Orwell",
+          "category": "Dystopian",
+          "price": 9.99,
+          "description": "Classic dystopian novel about totalitarianism and surveillance.",
+          "cover_image": "pic2.jpg"
+      },
+      {
+          "id": 3,
+          "title": "The Great Gatsby",
+          "author": "F. Scott Fitzgerald",
+          "category": "Classic",
+          "price": 11.50,
+          "description": "A story of the Jazz Age and the American Dream.",
+          "cover_image": "pic3.png"
+      },
+      {
+          "id": 4,
+          "title": "Moby-Dick",
+          "author": "Herman Melville",
+          "category": "Classic",
+          "price": 13.25,
+          "description": "Novel about the voyage of the whaling ship Pequod.",
+          "cover_image": "pic4.jpg"
+        },
+        {
+          "id": 5,
+          "title": "Brave New World",
+          "author": "Aldous Huxley",
+          "category": "Science Fiction",
+          "price": 10.75,
+          "description": "A dystopian social science fiction novel.",
+          "cover_image": "pic5.jpg"
+        },
+        {
+          "id": 6,
+          "title": "Pride and Prejudice",
+          "author": "Jane Austen",
+          "category": "Classic",
+          "price": 9.99,
+          "description": "Classic romantic novel of manners.",
+          "cover_image": "pic6.jpg"
+        },
+        {
+          "id": 7,
+          "title": "The Catcher in the Rye",
+          "author": "J.D. Salinger",
+          "category": "Fiction",
+          "price": 8.50,
+          "description": "Novel known for its themes of teenage angst and alienation.",
+          "cover_image": "pic7.jpg"
+        },
+        {
+          "id": 8,
+          "title": "The Lord of the Rings",
+          "author": "J.R.R. Tolkien",
+          "category": "Fantasy",
+          "price": 15.99,
+          "description": "High-fantasy novel series.",
+          "cover_image": "pic8.jpg"
+        },
+        {
+          "id": 9,
+          "title": "The Hobbit",
+          "author": "J.R.R. Tolkien",
+          "category": "Fantasy",
+          "price": 11.75,
+          "description": "Prequel to The Lord of the Rings.",
+          "cover_image": "pic9.jpg"
+        },
+        {
+          "id": 10,
+          "title": "The Da Vinci Code",
+          "author": "Dan Brown",
+          "category": "Mystery",
+          "price": 14.25,
+          "description": "Mystery thriller novel.",
+          "cover_image": "pic10.jpg"
+      },
+      {
+          "id": 11,
+          "title": "The Alchemist",
+          "author": "Paulo Coelho",
+          "category": "Fiction",
+          "price": 10.50,
+          "description": "Philosophical novel.",
+          "cover_image": "pic11.jpg"
+      },
+      {
+          "id": 12,
+          "title": "A Tale of Two Cities",
+          "author": "Charles Dickens",
+          "category": "Classic",
+          "price": 12.25,
+          "description": "Historical novel set during the French Revolution.",
+          "cover_image": "pic12.jpg"
+      },
+      {
+          "id": 13,
+          "title": "War and Peace",
+          "author": "Leo Tolstoy",
+          "category": "Historical Fiction",
+          "price": 16.99,
+          "description": "Epic novel set during the Napoleonic Wars.",
+          "cover_image": "pic13.jpg"
+      },
+      {
+          "id": 14,
+          "title": "The Picture of Dorian Gray",
+          "author": "Oscar Wilde",
+          "category": "Classic",
+          "price": 11.99,
+          "description": "Gothic and philosophical novel.",
+          "cover_image": "pic14.jpg"
+      },
+      {
+          "id": 15,
+          "title": "The Adventures of Huckleberry Finn",
+          "author": "Mark Twain",
+          "category": "Classic",
+          "price": 10.99,
+          "description": "Novel known for its social commentary.",
+          "cover_image": "pic15.jpg"
+        },
+        {
+          "id": 16,
+          "title": "Jane Eyre",
+          "author": "Charlotte Bronte",
+          "category": "Classic",
+          "price": 9.50,
+          "description": "Autobiographical novel.",
+          "cover_image": "pic16.jpg"
+        },
+        {
+          "id": 17,
+          "title": "The Road",
+          "author": "Cormac McCarthy",
+          "category": "Dystopian",
+          "price": 13.75,
+          "description": "Post-apocalyptic novel.",
+          "cover_image": "pic17.jpg"
+        },
+        {
+          "id": 18,
+          "title": "Frankenstein",
+          "author": "Mary Shelley",
+          "category": "Gothic",
+          "price": 11.25,
+          "description": "Gothic novel about science and creation.",
+          "cover_image": "pic18.jpg"
+        },
+        {
+          "id": 19,
+          "title": "The Stand",
+          "author": "Stephen King",
+          "category": "Horror",
+          "price": 14.50,
+          "description": "Post-apocalyptic horror/fantasy novel.",
+          "cover_image": "pic19.jpg"
+        },
+        {
+          "id": 20,
+          "title": "Crime and Punishment",
+          "author": "Fyodor Dostoevsky",
+          "category": "Classic",
+          "price": 12.50,
+          "description": "Psychological novel.",
+          "cover_image": "pic20.jpg"
+        },
+        {
+          "id": 21,
+          "title": "Les Miserables",
+          "author": "Victor Hugo",
+          "category": "Classic",
+          "price": 13.99,
+          "description": "Historical novel set in France.",
+          "cover_image": "pic21.jpg"
+        },
+        {
+          "id": 22,
+          "title": "The Shining",
+          "author": "Stephen King",
+          "category": "Horror",
+          "price": 11.75,
+          "description": "Horror novel.",
+          "cover_image": "pic22.jpg"
+        },
+        {
+          "id": 23,
+          "title": "The Odyssey",
+          "author": "Homer",
+          "category": "Classic",
+          "price": 10.25,
+          "description": "Ancient Greek epic poem.",
+          "cover_image": "pic23.jpg"
+        },
+        {
+          "id": 24,
+          "title": "The Stranger",
+          "author": "Albert Camus",
+          "category": "Philosophical",
+          "price": 12.25,
+          "description": "Existential novel.",
+          "cover_image": "pic24.jpg"
+        },
+        {
+          "id": 25,
+          "title": "Gone with the Wind",
+          "author": "Margaret Mitchell",
+          "category": "Historical Fiction",
+          "price": 13.50,
+          "description": "Historical novel set in the American South during the Civil War.",
+          "cover_image": "pic25.jpg"
+        },
+        {
+          "id": 26,
+          "title": "The Kite Runner",
+          "author": "Khaled Hosseini",
+          "category": "Contemporary",
+          "price": 10.99,
+          "description": "Contemporary novel set in Afghanistan.",
+          "cover_image": "pic26.jpg"
+        },
+        {
+          "id": 27,
+          "title": "The Bell Jar",
+          "author": "Sylvia Plath",
+          "category": "Autobiographical",
+          "price": 11.50,
+          "description": "Autobiographical novel.",
+          "cover_image": "pic27.jpg"
+        },
+        {
+          "id": 28,
+          "title": "The Count of Monte Cristo",
+          "author": "Alexandre Dumas",
+          "category": "Adventure",
+          "price": 12.99,
+          "description": "Adventure novel.",
+          "cover_image": "pic28.jpg"
+        },
+        {
+          "id": 29,
+          "title": "Anna Karenina",
+          "author": "Leo Tolstoy",
+          "category": "Classic",
+          "price": 12.75,
+          "description": "Tragic novel.",
+          "cover_image": "pic29.jpg"
+        },
+        {
+          "id": 30,
+          "title": "The Grapes of Wrath",
+          "author": "John Steinbeck",
+          "category": "Classic",
+          "price": 11.99,
+          "description": "Novel set during the Great Depression.",
+          "cover_image": "pic30.jpg"
+        }
+
+        
+      ];
+        
+    function displayBooks() {
+        const bookCatalog = document.getElementById("bookCatalog");
+
+        books.forEach(book => {
+            const bookDiv = document.createElement("div");
+            bookDiv.classList.add("book");
+
+            const image = document.createElement("img");
+            image.src = book.cover_image;
+            image.alt = `${book.title} cover`;
+
+            const title = document.createElement("h2");
+            title.textContent = book.title;
+
+            const author = document.createElement("p");
+            author.textContent = `Author: ${book.author}`;
+
+            const category = document.createElement("p");
+            category.textContent = `Category: ${book.category}`;
+
+            const price = document.createElement("p");
+            price.textContent = `Price: $${book.price.toFixed(2)}`;
+
+            const description = document.createElement("p");
+            description.textContent = book.description;
+
+
+            bookDiv.appendChild(image);
+            bookDiv.appendChild(title);
+            bookDiv.appendChild(author);
+            bookDiv.appendChild(category);
+            bookDiv.appendChild(price);
+            bookDiv.appendChild(description);
+
+            
+            bookCatalog.appendChild(bookDiv);
+        });
+    }
+
+
+    displayBooks();
+</script>
+
+</body>
+</html>
